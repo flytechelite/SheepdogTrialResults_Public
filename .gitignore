@@ -1,0 +1,14 @@
+# Excel temp files
+~$*
+~$*.xlsx
+
+# Temp files
+*.tmp
+
+# OS junk
+Thumbs.db
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
