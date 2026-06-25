@@ -402,52 +402,76 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const getCellValue = (tr, idx) => tr.children[idx]?.innerText?.trim() || "";
+      const specials = ["RT", "DQ", "RET", "SCR", "DNS", "DNF", "NP"];
 
-      const rowHasSpecial = (tr) => {
-        const specials = ["RT", "DQ", "RET", "SCR", "DNS", "DNF", "NP"];
+      const getCellValue = (tr, idx) =>
+        tr.children[idx]?.innerText?.trim() || "";
 
-        return Array.from(tr.children).some(td =>
-          specials.includes((td.innerText || "").trim().toUpperCase())
-        );
+      const normalizeText = (value) =>
+        (value || "").trim().toUpperCase();
+
+      const cellHasSpecial = (value) => {
+        const text = normalizeText(value);
+
+        // Match exact result codes, or codes surrounded by spaces/punctuation.
+        // This catches "DQ", "RT", "DQ - left course", etc.
+        return specials.some(code => {
+          const pattern = new RegExp("(^|[^A-Z0-9])" + code + "([^A-Z0-9]|$)");
+          return pattern.test(text);
+        });
+      };
+
+      const rowHasSpecial = (tr) =>
+        Array.from(tr.children).some(td => cellHasSpecial(td.innerText));
+
+      const compareValues = (rawA, rawB) => {
+        const aBlank = normalizeText(rawA) === "";
+        const bBlank = normalizeText(rawB) === "";
+
+        // Keep blanks below real values, but above RT/DQ/etc. rows.
+        if (aBlank && !bBlank) return 1;
+        if (!aBlank && bBlank) return -1;
+        if (aBlank && bBlank) return 0;
+
+        const nA = Number(rawA);
+        const nB = Number(rawB);
+
+        if (!Number.isNaN(nA) && !Number.isNaN(nB)) {
+          return nA - nB;
+        }
+
+        return rawA.localeCompare(rawB, undefined, {
+          numeric: true,
+          sensitivity: "base"
+        });
       };
 
       const comparer = (idx, asc) => (a, b) => {
         const aIsSpecial = rowHasSpecial(a);
         const bIsSpecial = rowHasSpecial(b);
 
-        // Always keep RT/DQ/etc. rows at the bottom, regardless of sort direction
+        // Always keep RT/DQ/etc. rows at the bottom, regardless of sort direction.
         if (aIsSpecial && !bIsSpecial) return 1;
         if (!aIsSpecial && bIsSpecial) return -1;
 
         const rawA = getCellValue(a, idx);
         const rawB = getCellValue(b, idx);
 
-        const nA = parseFloat(rawA);
-        const nB = parseFloat(rawB);
-
-        let result;
-
-        if (!isNaN(nA) && !isNaN(nB)) {
-          result = nA - nB;
-        } else {
-          result = rawA.localeCompare(rawB, undefined, {
-            numeric: true,
-            sensitivity: "base"
-          });
-        }
-
+        const result = compareValues(rawA, rawB);
         return asc ? result : -result;
       };
 
-      document.querySelectorAll("th").forEach(th => {
+      document.querySelectorAll("table.results-table th").forEach(th => {
         th.addEventListener("click", function () {
           const table = th.closest("table");
           const tbody = table.querySelector("tbody");
           const idx = Array.from(th.parentNode.children).indexOf(th);
           const asc = !th.classList.contains("asc");
 
-          table.querySelectorAll("th").forEach(h => h.classList.remove("asc", "desc"));
+          table.querySelectorAll("th").forEach(h =>
+            h.classList.remove("asc", "desc")
+          );
+
           th.classList.add(asc ? "asc" : "desc");
 
           Array.from(tbody.querySelectorAll("tr"))
