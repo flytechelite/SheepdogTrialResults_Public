@@ -46,19 +46,19 @@
     /* Mobile phones */
     @media (max-width: 768px) {
         body {
-            font-size: 20px;
+            font-size: 22px;
         }
 
         h1 {
-            font-size: 36px;
+            font-size: 42px;
         }
 
         table.results-table {
-            font-size: 20px;
+            font-size: 18px;
         }
 
         th, td {
-            padding: 12px 16px;
+            padding: 10px 12px;
         }
 
         .nav a {
@@ -452,18 +452,41 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const getCellValue = (tr, idx) => tr.children[idx]?.innerText?.trim() || "";
+
+      const rowHasSpecial = (tr) => {
+        const specials = ["RT", "DQ", "RET", "SCR", "DNS", "DNF", "NP"];
+
+        return Array.from(tr.children).some(td =>
+          specials.includes((td.innerText || "").trim().toUpperCase())
+        );
+      };
+
       const comparer = (idx, asc) => (a, b) => {
-        const v1 = getCellValue(asc ? a : b, idx);
-        const v2 = getCellValue(asc ? b : a, idx);
-        const n1 = parseFloat(v1);
-        const n2 = parseFloat(v2);
+        const aIsSpecial = rowHasSpecial(a);
+        const bIsSpecial = rowHasSpecial(b);
 
-        if (!isNaN(n1) && !isNaN(n2)) return n1 - n2;
+        // Always keep RT/DQ/etc. rows at the bottom, regardless of sort direction
+        if (aIsSpecial && !bIsSpecial) return 1;
+        if (!aIsSpecial && bIsSpecial) return -1;
 
-        return v1.localeCompare(v2, undefined, {
-          numeric: true,
-          sensitivity: "base"
-        });
+        const rawA = getCellValue(a, idx);
+        const rawB = getCellValue(b, idx);
+
+        const nA = parseFloat(rawA);
+        const nB = parseFloat(rawB);
+
+        let result;
+
+        if (!isNaN(nA) && !isNaN(nB)) {
+          result = nA - nB;
+        } else {
+          result = rawA.localeCompare(rawB, undefined, {
+            numeric: true,
+            sensitivity: "base"
+          });
+        }
+
+        return asc ? result : -result;
       };
 
       document.querySelectorAll("th").forEach(th => {

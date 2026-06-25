@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="60">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thursday Nursery 3 Results</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 16px;
+      background: #f7f7f7;
+      color: #222;
+    }
+    h1 { margin: 0 0 8px 0; font-size: 28px; }
+    .meta { color: #666; font-size: 0.95rem; margin-bottom: 16px; }
+    .nav { margin-bottom: 16px; }
+    .nav a { color: #1a5fb4; text-decoration: none; font-weight: bold; }
+    .table-wrap {
+      overflow-x: auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 10px;
+    }
+    table.results-table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 15px;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px 10px;
+      text-align: left;
+      white-space: nowrap;
+    }
+    th {
+      background: #e9ecef;
+      position: sticky;
+      top: 0;
+      cursor: pointer;
+    }
+    tr:nth-child(even) { background: #fafafa; }
+    tr:hover { background: #eef5ff; }
+    /* Mobile phones */
+    @media (max-width: 768px) {
+        body {
+            font-size: 22px;
+        }
+
+        h1 {
+            font-size: 42px;
+        }
+
+        table.results-table {
+            font-size: 18px;
+        }
+
+        th, td {
+            padding: 10px 12px;
+        }
+
+        .nav a {
+            font-size: 22px;
+        }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav"><a href="./index.html">← Back to event pages</a></div>
+  <h1>Thursday Nursery 3 Results</h1>
+  <div class="meta">Auto-refreshes every 60 seconds</div>
+  <div class="table-wrap"><table class="dataframe results-table">
+  <thead>
+    <tr style="text-align: right;">
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const getCellValue = (tr, idx) => tr.children[idx]?.innerText?.trim() || "";
+
+      const rowHasSpecial = (tr) => {
+        const specials = ["RT", "DQ", "RET", "SCR", "DNS", "DNF", "NP"];
+
+        return Array.from(tr.children).some(td =>
+          specials.includes((td.innerText || "").trim().toUpperCase())
+        );
+      };
+
+      const comparer = (idx, asc) => (a, b) => {
+        const aIsSpecial = rowHasSpecial(a);
+        const bIsSpecial = rowHasSpecial(b);
+
+        // Always keep RT/DQ/etc. rows at the bottom, regardless of sort direction
+        if (aIsSpecial && !bIsSpecial) return 1;
+        if (!aIsSpecial && bIsSpecial) return -1;
+
+        const rawA = getCellValue(a, idx);
+        const rawB = getCellValue(b, idx);
+
+        const nA = parseFloat(rawA);
+        const nB = parseFloat(rawB);
+
+        let result;
+
+        if (!isNaN(nA) && !isNaN(nB)) {
+          result = nA - nB;
+        } else {
+          result = rawA.localeCompare(rawB, undefined, {
+            numeric: true,
+            sensitivity: "base"
+          });
+        }
+
+        return asc ? result : -result;
+      };
+
+      document.querySelectorAll("th").forEach(th => {
+        th.addEventListener("click", function () {
+          const table = th.closest("table");
+          const tbody = table.querySelector("tbody");
+          const idx = Array.from(th.parentNode.children).indexOf(th);
+          const asc = !th.classList.contains("asc");
+
+          table.querySelectorAll("th").forEach(h => h.classList.remove("asc", "desc"));
+          th.classList.add(asc ? "asc" : "desc");
+
+          Array.from(tbody.querySelectorAll("tr"))
+            .sort(comparer(idx, asc))
+            .forEach(tr => tbody.appendChild(tr));
+        });
+      });
+    });
+  </script>
+</body>
+</html>
