@@ -185,20 +185,43 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const specials = ["RT", "DQ", "RET", "SCR", "DNS", "DNF", "NP"];
+      // ---------- Sheepdog Trial Sorting Rules ----------
+      const SPECIAL_RESULTS = ["RT", "DQ", "RET", "SCR", "DNS", "DNF", "NP"];
 
-      const getCellValue = (tr, idx) =>
-        tr.children[idx]?.innerText?.trim() || "";
+      const TIEBREAK_GROUPS = [
+        ["Outrun", "Lift", "Fetch"],
+        ["Drive"],
+        ["Cross Drive", "CrossDrive", "Cross-Drive", "X Drive"],
+        ["Pen"],
+        ["Shed"]
+      ];
+
+      const TOTAL_HEADERS = ["Total", "Total Score", "Score"];
 
       const normalizeText = (value) =>
         (value || "").trim().toUpperCase();
 
+      const normalizeHeader = (value) =>
+        (value || "").trim().toLowerCase().replace(/[^a-z0-9]/g, "");
+
+      const getCellValue = (tr, idx) =>
+        tr.children[idx]?.innerText?.trim() || "";
+
+      const toNumberOrNull = (value) => {
+        const text = (value || "").trim();
+        if (text === "") return null;
+
+        const cleaned = text.replace(/[^0-9.\-]/g, "");
+        if (cleaned === "" || cleaned === "-" || cleaned === ".") return null;
+
+        const n = Number(cleaned);
+        return Number.isNaN(n) ? null : n;
+      };
+
       const cellHasSpecial = (value) => {
         const text = normalizeText(value);
 
-        // Match exact result codes, or codes surrounded by spaces/punctuation.
-        // This catches "DQ", "RT", "DQ - left course", etc.
-        return specials.some(code => {
+        return SPECIAL_RESULTS.some(code => {
           const pattern = new RegExp("(^|[^A-Z0-9])" + code + "([^A-Z0-9]|$)");
           return pattern.test(text);
         });
@@ -207,21 +230,54 @@
       const rowHasSpecial = (tr) =>
         Array.from(tr.children).some(td => cellHasSpecial(td.innerText));
 
-      const compareValues = (rawA, rawB) => {
-        const aBlank = normalizeText(rawA) === "";
-        const bBlank = normalizeText(rawB) === "";
+      const getHeaders = (table) =>
+        Array.from(table.querySelectorAll("th")).map(th => th.innerText.trim());
+
+      const findColumnIndex = (headers, names) => {
+        const normalizedNames = names.map(normalizeHeader);
+        return headers.findIndex(h => normalizedNames.includes(normalizeHeader(h)));
+      };
+
+      const buildSortContext = (table) => {
+        const headers = getHeaders(table);
+
+        return {
+          headers,
+          totalIdx: findColumnIndex(headers, TOTAL_HEADERS),
+          tiebreakGroups: TIEBREAK_GROUPS.map(group =>
+            group
+              .map(name => findColumnIndex(headers, [name]))
+              .filter(idx => idx >= 0)
+          ).filter(group => group.length > 0)
+        };
+      };
+
+      const compareNumbersAscending = (aNum, bNum) => {
+        const aBlank = aNum === null;
+        const bBlank = bNum === null;
 
         // Keep blanks below real values, but above RT/DQ/etc. rows.
         if (aBlank && !bBlank) return 1;
         if (!aBlank && bBlank) return -1;
         if (aBlank && bBlank) return 0;
 
-        const nA = Number(rawA);
-        const nB = Number(rawB);
+        return aNum - bNum;
+      };
 
-        if (!Number.isNaN(nA) && !Number.isNaN(nB)) {
-          return nA - nB;
+      const compareValues = (rawA, rawB) => {
+        const nA = toNumberOrNull(rawA);
+        const nB = toNumberOrNull(rawB);
+
+        if (nA !== null || nB !== null) {
+          return compareNumbersAscending(nA, nB);
         }
+
+        const aBlank = normalizeText(rawA) === "";
+        const bBlank = normalizeText(rawB) === "";
+
+        if (aBlank && !bBlank) return 1;
+        if (!aBlank && bBlank) return -1;
+        if (aBlank && bBlank) return 0;
 
         return rawA.localeCompare(rawB, undefined, {
           numeric: true,
@@ -229,7 +285,52 @@
         });
       };
 
-      const comparer = (idx, asc) => (a, b) => {
+      const sumColumns = (tr, indexes) => {
+        if (!indexes || indexes.length === 0) return null;
+
+        let foundValue = false;
+        let total = 0;
+
+        indexes.forEach(idx => {
+          const n = toNumberOrNull(getCellValue(tr, idx));
+          if (n !== null) {
+            foundValue = true;
+            total += n;
+          }
+        });
+
+        return foundValue ? total : null;
+      };
+
+      const compareHigherIsBetter = (aValue, bValue) => {
+        const ascendingResult = compareNumbersAscending(aValue, bValue);
+        return -ascendingResult;
+      };
+
+      const compareTotalWithTiebreaks = (a, b, context) => {
+        // Official placing order: higher Total wins.
+        let result = compareHigherIsBetter(
+          toNumberOrNull(getCellValue(a, context.totalIdx)),
+          toNumberOrNull(getCellValue(b, context.totalIdx))
+        );
+
+        if (result !== 0) return result;
+
+        // Tie 1: higher Outrun + Lift + Fetch wins.
+        // Then higher Drive, Cross Drive, Pen, Shed.
+        for (const group of context.tiebreakGroups) {
+          result = compareHigherIsBetter(
+            sumColumns(a, group),
+            sumColumns(b, group)
+          );
+
+          if (result !== 0) return result;
+        }
+
+        return 0;
+      };
+
+      const comparer = (idx, asc, context) => (a, b) => {
         const aIsSpecial = rowHasSpecial(a);
         const bIsSpecial = rowHasSpecial(b);
 
@@ -237,10 +338,15 @@
         if (aIsSpecial && !bIsSpecial) return 1;
         if (!aIsSpecial && bIsSpecial) return -1;
 
-        const rawA = getCellValue(a, idx);
-        const rawB = getCellValue(b, idx);
+        let result;
 
-        const result = compareValues(rawA, rawB);
+        if (idx === context.totalIdx && context.totalIdx >= 0) {
+          // For Total, descending means official placing order.
+          result = compareTotalWithTiebreaks(a, b, context);
+          return asc ? -result : result;
+        }
+
+        result = compareValues(getCellValue(a, idx), getCellValue(b, idx));
         return asc ? result : -result;
       };
 
@@ -249,7 +355,16 @@
           const table = th.closest("table");
           const tbody = table.querySelector("tbody");
           const idx = Array.from(th.parentNode.children).indexOf(th);
-          const asc = !th.classList.contains("asc");
+          const context = buildSortContext(table);
+          const isTotalColumn = idx === context.totalIdx;
+
+          const currentlyAsc = th.classList.contains("asc");
+          const currentlyDesc = th.classList.contains("desc");
+
+          // First click on Total should show official placing order: high score first.
+          const asc = isTotalColumn && !currentlyAsc && !currentlyDesc
+            ? false
+            : !currentlyAsc;
 
           table.querySelectorAll("th").forEach(h =>
             h.classList.remove("asc", "desc")
@@ -258,7 +373,7 @@
           th.classList.add(asc ? "asc" : "desc");
 
           Array.from(tbody.querySelectorAll("tr"))
-            .sort(comparer(idx, asc))
+            .sort(comparer(idx, asc, context))
             .forEach(tr => tbody.appendChild(tr));
         });
       });
