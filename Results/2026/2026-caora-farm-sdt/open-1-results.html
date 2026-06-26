@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="60">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Open 1 Results</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 16px;
+      background: #f7f7f7;
+      color: #222;
+    }
+    h1 { margin: 0 0 8px 0; font-size: 28px; }
+    .meta { color: #666; font-size: 0.95rem; margin-bottom: 16px; }
+    .nav { margin-bottom: 16px; }
+    .nav a { color: #1a5fb4; text-decoration: none; font-weight: bold; }
+    .table-wrap {
+      overflow-x: auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 10px;
+    }
+    table.results-table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 15px;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px 10px;
+      text-align: left;
+      white-space: nowrap;
+    }
+    th {
+      background: #e9ecef;
+      position: sticky;
+      top: 0;
+      cursor: pointer;
+    }
+    tr:nth-child(even) { background: #fafafa; }
+    tr:hover { background: #eef5ff; }
+    /* Mobile phones */
+    @media (max-width: 768px) {
+        body {
+            font-size: 22px;
+        }
+
+        h1 {
+            font-size: 42px;
+        }
+
+        table.results-table {
+            font-size: 18px;
+        }
+
+        th, td {
+            padding: 10px 12px;
+        }
+
+        .nav a {
+            font-size: 22px;
+        }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav"><a href="./index.html">← Back to event pages</a></div>
+  <h1>Open 1 Results</h1>
+  <div class="meta">Auto-refreshes every 60 seconds</div>
+  <div class="table-wrap"><table class="dataframe results-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>RO</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Dog</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Pam</td>
+      <td>Mueller</td>
+      <td>Gnat</td>
+      <td>58</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Josh</td>
+      <td>Newcomb</td>
+      <td>Hatchet</td>
+      <td>66</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Martha</td>
+      <td>Walke</td>
+      <td>Gael</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Beverly</td>
+      <td>Lambert</td>
+      <td>Queen</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Chloe</td>
+      <td>Scott</td>
+      <td>Una</td>
+      <td>73</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Sally</td>
+      <td>Molloy</td>
+      <td>Reese</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Sue</td>
+      <td>Schoen</td>
+      <td>Reo</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Normandie</td>
+      <td>Hand</td>
+      <td>Bell</td>
+      <td>59</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>Mich</td>
+      <td>Ferraro</td>
+      <td>Bella</td>
+      <td>72</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Francis</td>
+      <td>Chai</td>
+      <td>Kip</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>Diana</td>
+      <td>Wickman</td>
+      <td>Bru</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Eric</td>
+      <td>Johnson</td>
+      <td>Blade</td>
+      <td>61</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>Dominick</td>
+      <td>Frabizio</td>
+      <td>Mick</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>Maria</td>
+      <td>Mick</td>
+      <td>Sylvie</td>
+      <td>58</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>Eileen</td>
+      <td>Stein</td>
+      <td>Nan</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>Skylar</td>
+      <td>Landis</td>
+      <td>Ettrick Tripp</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>Peggy</td>
+      <td>Flanagan</td>
+      <td>Kitt</td>
+      <td>89</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>Warren</td>
+      <td>Mick</td>
+      <td>Finn</td>
+      <td>74</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>Teri</td>
+      <td>Rhodes</td>
+      <td>Zuben</td>
+      <td>61</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>Danielle</td>
+      <td>Eriksen</td>
+      <td>Finn</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>Gene</td>
+      <td>Sheninger</td>
+      <td>Aron</td>
+      <td>58</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>Dave</td>
+      <td>Sharp</td>
+      <td>Carl</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>John</td>
+      <td>Campbell</td>
+      <td>Kate</td>
+      <td>59</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>Nancy Joyce</td>
+      <td>Simmons</td>
+      <td>Louise</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>Dave</td>
+      <td>Goyer</td>
+      <td>Ben</td>
+      <td>DQ</td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td>Sara</td>
+      <td>Reiter</td>
+      <td>Zac</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td>Christine</td>
+      <td>Koval</td>
+      <td>Tru</td>
+      <td>72</td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>Fiona</td>
+      <td>Robertson</td>
+      <td>Kale</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <td>29</td>
+      <td>Rosemary</td>
+      <td>Redick</td>
+      <td>Nyx</td>
+      <td>DQ</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>Mike</td>
+      <td>Perry</td>
+      <td>Vega</td>
+      <td>63</td>
+    </tr>
+    <tr>
+      <td>31</td>
+      <td>Pat</td>
+      <td>Warne</td>
+      <td>Millie</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td>Christine</td>
+      <td>Elloitt</td>
+      <td>Troy</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>33</td>
+      <td>Virginia</td>
+      <td>Prince</td>
+      <td>June</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>Sara</td>
+      <td>Mishefke</td>
+      <td>Clark</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <td>34b</td>
+      <td>Maggie</td>
+      <td>Chambers</td>
+      <td>Bode</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>Barbara</td>
+      <td>Armata</td>
+      <td>Tye</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>36</td>
+      <td>Carolyn</td>
+      <td>West</td>
+      <td>Min</td>
+      <td>84</td>
+    </tr>
+    <tr>
+      <td>37</td>
+      <td>Laurie</td>
+      <td>Sargent</td>
+      <td>Chip</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>38</td>
+      <td>Becca</td>
+      <td>Goyer</td>
+      <td>Tuck</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>39</td>
+      <td>Peggy</td>
+      <td>Chute</td>
+      <td>Stetson</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>40</td>
+      <td>Charlie</td>
+      <td>Hurt</td>
+      <td>Archer</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>41</td>
+      <td>kim</td>
+      <td>Lippolis</td>
+      <td>Joe</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <td>42</td>
+      <td>Joanne</td>
+      <td>Thayer</td>
+      <td>Zsasz</td>
+      <td>SCR</td>
+    </tr>
+    <tr>
+      <td>43</td>
+      <td>Maggie</td>
+      <td>Chambers</td>
+      <td>Ever</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <td>44</td>
+      <td>Paul</td>
+      <td>Batz</td>
+      <td>Reyn</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>45</td>
+      <td>Elizabeth</td>
+      <td>Smith-Fries</td>
+      <td>Logan</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>46</td>
+      <td>Judy</td>
+      <td>Gambill</td>
+      <td>Mist</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <td>47</td>
+      <td>Holly</td>
+      <td>Fincher</td>
+      <td>Clare</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <td>48</td>
+      <td>Sally</td>
+      <td>Campbell</td>
+      <td>Sadie</td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <td>49</td>
+      <td>Barbara</td>
+      <td>Armata</td>
+      <td>Max</td>
+      <td>69</td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>John</td>
+      <td>Campbell</td>
+      <td>Roy</td>
+      <td>69</td>
+    </tr>
+    <tr>
+      <td>51</td>
+      <td>Tom</td>
+      <td>Wilson</td>
+      <td>Mirk</td>
+      <td>83</td>
+    </tr>
+    <tr>
+      <td>52</td>
+      <td>Eileen</td>
+      <td>Stein</td>
+      <td>Quaya</td>
+      <td>41</td>
+    </tr>
+    <tr>
+      <td>53</td>
+      <td>Charlie</td>
+      <td>Hurt</td>
+      <td>Mike</td>
+      <td>78</td>
+    </tr>
+    <tr>
+      <td>54</td>
+      <td>Elizabeth</td>
+      <td>Smith-Fries</td>
+      <td>Grace</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <td>55</td>
+      <td>Maria</td>
+      <td>Mick</td>
+      <td>Treat</td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <td>56</td>
+      <td>Teri</td>
+      <td>Rhodes</td>
+      <td>Rudy</td>
+      <td>63</td>
+    </tr>
+    <tr>
+      <td>57</td>
+      <td>Pam</td>
+      <td>Davies</td>
+      <td>Seren</td>
+      <td>SCR</td>
+    </tr>
+    <tr>
+      <td>58</td>
+      <td>Peggy</td>
+      <td>Chute</td>
+      <td>Vera</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <td>59</td>
+      <td>Skylar</td>
+      <td>Landis</td>
+      <td>Ettrick Wren</td>
+      <td>73</td>
+    </tr>
+    <tr>
+      <td>60</td>
+      <td>Sally</td>
+      <td>Campbell</td>
+      <td>Maizie</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <td>60b</td>
+      <td>Tom</td>
+      <td>Wilson</td>
+      <td>Tess</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <td>61</td>
+      <td>Gene</td>
+      <td>Sheninger</td>
+      <td>Jim</td>
+      <td>DQ</td>
+    </tr>
+    <tr>
+      <td>62</td>
+      <td>Carolyn</td>
+      <td>West</td>
+      <td>Bee</td>
+      <td>76</td>
+    </tr>
+    <tr>
+      <td>63</td>
+      <td>Kim</td>
+      <td>Lippolis</td>
+      <td>Sam</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <td>64</td>
+      <td>Joanne</td>
+      <td>Thayer</td>
+      <td>Pepe</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <td>65</td>
+      <td>Pat</td>
+      <td>Warne</td>
+      <td>Trystan</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>66</td>
+      <td>Chloe</td>
+      <td>Scott</td>
+      <td>Cindy</td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <td>67</td>
+      <td>Dave</td>
+      <td>Goyer</td>
+      <td>Dan</td>
+      <td>71</td>
+    </tr>
+    <tr>
+      <td>68</td>
+      <td>Becca</td>
+      <td>Goyer</td>
+      <td>Claire</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <td>69</td>
+      <td>Fiona</td>
+      <td>Robertson</td>
+      <td>Bean</td>
+      <td>84</td>
+    </tr>
+    <tr>
+      <td>70</td>
+      <td>Mike</td>
+      <td>Perry</td>
+      <td>Dakota Lee</td>
+      <td>70</td>
+    </tr>
+  </tbody>
+</table></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const specials = ["RT", "DQ", "RET", "SCR", "DNS", "DNF", "NP"];
+
+      const getCellValue = (tr, idx) =>
+        tr.children[idx]?.innerText?.trim() || "";
+
+      const normalizeText = (value) =>
+        (value || "").trim().toUpperCase();
+
+      const cellHasSpecial = (value) => {
+        const text = normalizeText(value);
+
+        // Match exact result codes, or codes surrounded by spaces/punctuation.
+        // This catches "DQ", "RT", "DQ - left course", etc.
+        return specials.some(code => {
+          const pattern = new RegExp("(^|[^A-Z0-9])" + code + "([^A-Z0-9]|$)");
+          return pattern.test(text);
+        });
+      };
+
+      const rowHasSpecial = (tr) =>
+        Array.from(tr.children).some(td => cellHasSpecial(td.innerText));
+
+      const compareValues = (rawA, rawB) => {
+        const aBlank = normalizeText(rawA) === "";
+        const bBlank = normalizeText(rawB) === "";
+
+        // Keep blanks below real values, but above RT/DQ/etc. rows.
+        if (aBlank && !bBlank) return 1;
+        if (!aBlank && bBlank) return -1;
+        if (aBlank && bBlank) return 0;
+
+        const nA = Number(rawA);
+        const nB = Number(rawB);
+
+        if (!Number.isNaN(nA) && !Number.isNaN(nB)) {
+          return nA - nB;
+        }
+
+        return rawA.localeCompare(rawB, undefined, {
+          numeric: true,
+          sensitivity: "base"
+        });
+      };
+
+      const comparer = (idx, asc) => (a, b) => {
+        const aIsSpecial = rowHasSpecial(a);
+        const bIsSpecial = rowHasSpecial(b);
+
+        // Always keep RT/DQ/etc. rows at the bottom, regardless of sort direction.
+        if (aIsSpecial && !bIsSpecial) return 1;
+        if (!aIsSpecial && bIsSpecial) return -1;
+
+        const rawA = getCellValue(a, idx);
+        const rawB = getCellValue(b, idx);
+
+        const result = compareValues(rawA, rawB);
+        return asc ? result : -result;
+      };
+
+      document.querySelectorAll("table.results-table th").forEach(th => {
+        th.addEventListener("click", function () {
+          const table = th.closest("table");
+          const tbody = table.querySelector("tbody");
+          const idx = Array.from(th.parentNode.children).indexOf(th);
+          const asc = !th.classList.contains("asc");
+
+          table.querySelectorAll("th").forEach(h =>
+            h.classList.remove("asc", "desc")
+          );
+
+          th.classList.add(asc ? "asc" : "desc");
+
+          Array.from(tbody.querySelectorAll("tr"))
+            .sort(comparer(idx, asc))
+            .forEach(tr => tbody.appendChild(tr));
+        });
+      });
+    });
+  </script>
+</body>
+</html>
