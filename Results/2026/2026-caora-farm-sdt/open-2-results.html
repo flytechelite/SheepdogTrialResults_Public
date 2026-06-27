@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="60">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Open 2 Results</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 16px;
+      background: #f7f7f7;
+      color: #222;
+    }
+    h1 { margin: 0 0 8px 0; font-size: 28px; }
+    .meta { color: #666; font-size: 0.95rem; margin-bottom: 16px; }
+    .nav { margin-bottom: 16px; }
+    .nav a { color: #1a5fb4; text-decoration: none; font-weight: bold; }
+    .table-wrap {
+      overflow-x: auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 10px;
+    }
+    table.results-table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 15px;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px 10px;
+      text-align: left;
+      white-space: nowrap;
+    }
+    th {
+      background: #e9ecef;
+      position: sticky;
+      top: 0;
+      cursor: pointer;
+    }
+    tr:nth-child(even) { background: #fafafa; }
+    tr:hover { background: #eef5ff; }
+    /* Mobile phones */
+    @media (max-width: 768px) {
+        body {
+            font-size: 22px;
+        }
+
+        h1 {
+            font-size: 42px;
+        }
+
+        table.results-table {
+            font-size: 18px;
+        }
+
+        th, td {
+            padding: 10px 12px;
+        }
+
+        .nav a {
+            font-size: 22px;
+        }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav"><a href="./index.html">← Back to event pages</a></div>
+  <h1>Open 2 Results</h1>
+  <div class="meta">Auto-refreshes every 60 seconds</div>
+  <div class="table-wrap"><table class="dataframe results-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>RO</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Dog</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Kim</td>
+      <td>Lippolis</td>
+      <td>Joe</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Warren</td>
+      <td>Mick</td>
+      <td>Finn</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Ginny</td>
+      <td>Prince</td>
+      <td>June</td>
+      <td>71</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Peggy</td>
+      <td>Flanagan</td>
+      <td>Camden</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Joanne</td>
+      <td>Thayer</td>
+      <td>Zsasz</td>
+      <td>DQ</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Christine</td>
+      <td>Koval</td>
+      <td>Rex</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Lauren</td>
+      <td>Seabolt</td>
+      <td>Ross</td>
+      <td>68</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Carolyn</td>
+      <td>West</td>
+      <td>Bee</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>Fiona</td>
+      <td>Robertson</td>
+      <td>Bean</td>
+      <td>82</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Laurie</td>
+      <td>Sargent</td>
+      <td>Chhip</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>Dave</td>
+      <td>Goyer</td>
+      <td>Dan</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Peter</td>
+      <td>VandeCar</td>
+      <td>oso</td>
+      <td>DQ</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>Dominick</td>
+      <td>Frabizio</td>
+      <td>Nell</td>
+      <td>RT</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>Normandie</td>
+      <td>Hand</td>
+      <td>Bell</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>Judy</td>
+      <td>Gambill</td>
+      <td>Mist</td>
+      <td>63</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>Francis</td>
+      <td>Chai</td>
+      <td>Kip</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>Paul</td>
+      <td>Batz</td>
+      <td>Reyn</td>
+      <td>81</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>Eric</td>
+      <td>Johnson</td>
+      <td>Blade</td>
+      <td>67</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>Beverly</td>
+      <td>Lambert</td>
+      <td>Annie</td>
+      <td>87</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>Mich</td>
+      <td>Ferraro</td>
+      <td>Peavy</td>
+      <td>75</td>
+    </tr>
+  </tbody>
+</table></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // ---------- Sheepdog Trial Sorting Rules ----------
+      const SPECIAL_RESULTS = ["RT", "DQ", "RET", "SCR", "DNS", "DNF", "NP"];
+
+      const TIEBREAK_GROUPS = [
+        ["Outrun", "Lift", "Fetch"],
+        ["Drive"],
+        ["Cross Drive", "CrossDrive", "Cross-Drive", "X Drive"],
+        ["Pen"],
+        ["Shed"]
+      ];
+
+      const TOTAL_HEADERS = ["Total", "Total Score", "Score"];
+
+      const normalizeText = (value) =>
+        (value || "").trim().toUpperCase();
+
+      const normalizeHeader = (value) =>
+        (value || "").trim().toLowerCase().replace(/[^a-z0-9]/g, "");
+
+      const getCellValue = (tr, idx) =>
+        tr.children[idx]?.innerText?.trim() || "";
+
+      const toNumberOrNull = (value) => {
+        const text = (value || "").trim();
+        if (text === "") return null;
+
+        const cleaned = text.replace(/[^0-9.\-]/g, "");
+        if (cleaned === "" || cleaned === "-" || cleaned === ".") return null;
+
+        const n = Number(cleaned);
+        return Number.isNaN(n) ? null : n;
+      };
+
+      const cellHasSpecial = (value) => {
+        const text = normalizeText(value);
+
+        return SPECIAL_RESULTS.some(code => {
+          const pattern = new RegExp("(^|[^A-Z0-9])" + code + "([^A-Z0-9]|$)");
+          return pattern.test(text);
+        });
+      };
+
+      const rowHasSpecial = (tr) =>
+        Array.from(tr.children).some(td => cellHasSpecial(td.innerText));
+
+      const getHeaders = (table) =>
+        Array.from(table.querySelectorAll("th")).map(th => th.innerText.trim());
+
+      const findColumnIndex = (headers, names) => {
+        const normalizedNames = names.map(normalizeHeader);
+        return headers.findIndex(h => normalizedNames.includes(normalizeHeader(h)));
+      };
+
+      const buildSortContext = (table) => {
+        const headers = getHeaders(table);
+
+        return {
+          headers,
+          totalIdx: findColumnIndex(headers, TOTAL_HEADERS),
+          tiebreakGroups: TIEBREAK_GROUPS.map(group =>
+            group
+              .map(name => findColumnIndex(headers, [name]))
+              .filter(idx => idx >= 0)
+          ).filter(group => group.length > 0)
+        };
+      };
+
+      const compareNumbersAscending = (aNum, bNum) => {
+        const aBlank = aNum === null;
+        const bBlank = bNum === null;
+
+        // Keep blanks below real values, but above RT/DQ/etc. rows.
+        if (aBlank && !bBlank) return 1;
+        if (!aBlank && bBlank) return -1;
+        if (aBlank && bBlank) return 0;
+
+        return aNum - bNum;
+      };
+
+      const compareValues = (rawA, rawB) => {
+        const nA = toNumberOrNull(rawA);
+        const nB = toNumberOrNull(rawB);
+
+        if (nA !== null || nB !== null) {
+          return compareNumbersAscending(nA, nB);
+        }
+
+        const aBlank = normalizeText(rawA) === "";
+        const bBlank = normalizeText(rawB) === "";
+
+        if (aBlank && !bBlank) return 1;
+        if (!aBlank && bBlank) return -1;
+        if (aBlank && bBlank) return 0;
+
+        return rawA.localeCompare(rawB, undefined, {
+          numeric: true,
+          sensitivity: "base"
+        });
+      };
+
+      const sumColumns = (tr, indexes) => {
+        if (!indexes || indexes.length === 0) return null;
+
+        let foundValue = false;
+        let total = 0;
+
+        indexes.forEach(idx => {
+          const n = toNumberOrNull(getCellValue(tr, idx));
+          if (n !== null) {
+            foundValue = true;
+            total += n;
+          }
+        });
+
+        return foundValue ? total : null;
+      };
+
+      const compareHigherIsBetter = (aValue, bValue) => {
+        const ascendingResult = compareNumbersAscending(aValue, bValue);
+        return -ascendingResult;
+      };
+
+      const compareTotalWithTiebreaks = (a, b, context) => {
+        // Official placing order: higher Total wins.
+        let result = compareHigherIsBetter(
+          toNumberOrNull(getCellValue(a, context.totalIdx)),
+          toNumberOrNull(getCellValue(b, context.totalIdx))
+        );
+
+        if (result !== 0) return result;
+
+        // Tie 1: higher Outrun + Lift + Fetch wins.
+        // Then higher Drive, Cross Drive, Pen, Shed.
+        for (const group of context.tiebreakGroups) {
+          result = compareHigherIsBetter(
+            sumColumns(a, group),
+            sumColumns(b, group)
+          );
+
+          if (result !== 0) return result;
+        }
+
+        return 0;
+      };
+
+      const comparer = (idx, asc, context) => (a, b) => {
+        const aIsSpecial = rowHasSpecial(a);
+        const bIsSpecial = rowHasSpecial(b);
+
+        // Always keep RT/DQ/etc. rows at the bottom, regardless of sort direction.
+        if (aIsSpecial && !bIsSpecial) return 1;
+        if (!aIsSpecial && bIsSpecial) return -1;
+
+        let result;
+
+        if (idx === context.totalIdx && context.totalIdx >= 0) {
+          // For Total, descending means official placing order.
+          result = compareTotalWithTiebreaks(a, b, context);
+          return asc ? -result : result;
+        }
+
+        result = compareValues(getCellValue(a, idx), getCellValue(b, idx));
+        return asc ? result : -result;
+      };
+
+      document.querySelectorAll("table.results-table th").forEach(th => {
+        th.addEventListener("click", function () {
+          const table = th.closest("table");
+          const tbody = table.querySelector("tbody");
+          const idx = Array.from(th.parentNode.children).indexOf(th);
+          const context = buildSortContext(table);
+          const isTotalColumn = idx === context.totalIdx;
+
+          const currentlyAsc = th.classList.contains("asc");
+          const currentlyDesc = th.classList.contains("desc");
+
+          // First click on Total should show official placing order: high score first.
+          const asc = isTotalColumn && !currentlyAsc && !currentlyDesc
+            ? false
+            : !currentlyAsc;
+
+          table.querySelectorAll("th").forEach(h =>
+            h.classList.remove("asc", "desc")
+          );
+
+          th.classList.add(asc ? "asc" : "desc");
+
+          Array.from(tbody.querySelectorAll("tr"))
+            .sort(comparer(idx, asc, context))
+            .forEach(tr => tbody.appendChild(tr));
+        });
+      });
+    });
+  </script>
+</body>
+</html>
